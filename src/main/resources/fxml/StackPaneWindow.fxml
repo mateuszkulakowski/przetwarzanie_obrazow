@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="kontenerVBOX" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1333.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StackPaneWindowController">
+   <children>
+      <MenuBar prefHeight="48.0" prefWidth="752.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Plik">
+            <items>
+              <MenuItem fx:id="mWczytaj" mnemonicParsing="false" onAction="#onActionmWczytaj" text="Wczytaj" />
+                  <MenuItem fx:id="mZapiszJako" mnemonicParsing="false" onAction="#onActionmZapiszJako" text="Zapisz jako ..." />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Funkcjonalności">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#onActionResetObrazka" text="Reset obrazka" />
+                  <MenuItem fx:id="mPokaz_histogram" mnemonicParsing="false" onAction="#onActionPokazHistogram" text="Pokaż histogram" />
+                  <MenuItem fx:id="mPrzyciemnianieRozjasnianie" mnemonicParsing="false" onAction="#onActionPrzyciemnianieRozjasnianie" text="Przyciemnienie/Rozjaśnianie" />
+                  <MenuItem mnemonicParsing="false" onAction="#onActionRozciagniecieHistogramu" text="Rozciągnięcie histogramu" />
+                  <MenuItem mnemonicParsing="false" onAction="#onActionWyrownanieHistogramu" text="Wyrównanie histogramu" />
+                  <MenuItem mnemonicParsing="false" onAction="#onActionBinaryzacjaReczna" text="Binaryzacja - ręczna" />
+                  <MenuItem mnemonicParsing="false" onAction="#onActionBinaryzacjaOtsu" text="Binaryzacja - Otsu" />
+               </items></Menu>
+          <Menu mnemonicParsing="false" text="Pomoc">
+          </Menu>
+        </menus>
+      </MenuBar>
+      <HBox prefHeight="465.0" prefWidth="725.0" spacing="20.0">
+         <children>
+            <ScrollPane fx:id="sOryginalImage" pannable="true" prefHeight="465.0" prefWidth="650.0">
+               <content>
+                  <ImageView fx:id="iOryginalImage" fitHeight="460.0" fitWidth="650.0" onMouseClicked="#onMouseClickedOryginalImage" onMouseDragged="#onMouseDraggedOryginalImage" onMouseExited="#onMouseExitedOryginalImage" onMouseMoved="#onMouseMovedOryginalImage" onMousePressed="#onMousePressedOryginalImage" pickOnBounds="true" preserveRatio="true" />
+               </content>
+            </ScrollPane>
+            <ScrollPane fx:id="sWorkingImage" pannable="true" prefHeight="465.0" prefWidth="650.0">
+               <content>
+                  <ImageView fx:id="iWorkingImage" fitHeight="460.0" fitWidth="650.0" onMouseMoved="#onMouseMovedWorkingImage" pickOnBounds="true" preserveRatio="true" />
+               </content>
+            </ScrollPane>
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox prefHeight="37.0" prefWidth="1100.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="21.0" prefWidth="668.0" text="Obraz oryginalny" />
+            <Label alignment="CENTER" prefHeight="21.0" prefWidth="560.0" text="Obraz zmodyfikowany" />
+         </children>
+      </HBox>
+      <HBox alignment="BOTTOM_LEFT" prefHeight="134.0" prefWidth="1333.0">
+         <children>
+            <Label fx:id="lPozycjaKursor" prefHeight="12.0" prefWidth="1334.0" text="Pozycja kursora" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
