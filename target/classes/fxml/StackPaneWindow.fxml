@@ -29,6 +29,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#onActionWyrownanieHistogramu" text="Wyrównanie histogramu" />
                   <MenuItem mnemonicParsing="false" onAction="#onActionBinaryzacjaReczna" text="Binaryzacja - ręczna" />
                   <MenuItem mnemonicParsing="false" onAction="#onActionBinaryzacjaOtsu" text="Binaryzacja - Otsu" />
+                  <MenuItem mnemonicParsing="false" onAction="#onActionBinaryzacjaNiblack" text="Binaryzacja - Niblack" />
                </items></Menu>
           <Menu mnemonicParsing="false" text="Pomoc">
           </Menu>
