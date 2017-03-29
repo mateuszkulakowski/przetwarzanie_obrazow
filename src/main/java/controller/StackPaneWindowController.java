@@ -360,7 +360,11 @@ public class StackPaneWindowController {
 		Binaryzacja.otsu();
 	}
 	
-	
+	@FXML
+	public void onActionBinaryzacjaNiblack()
+	{
+		Binaryzacja.niblack();
+	}
 	
 	
 	
