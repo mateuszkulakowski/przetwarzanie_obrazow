@@ -1,6 +1,6 @@
 package controller;
 
-import data.ClassKeeper;
+import data.ItemKeeper;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
@@ -21,8 +21,8 @@ public class ZmianaJasnosciController {
 	@FXML
 	void initialize()
 	{
-		iWorkingImage = ClassKeeper.getStackPaneWindowController().iWorkingImage;
-		iOryginalImage = ClassKeeper.getStackPaneWindowController().iOryginalImage;
+		iWorkingImage = ItemKeeper.getStackPaneWindowController().iWorkingImage;
+		iOryginalImage = ItemKeeper.getStackPaneWindowController().iOryginalImage;
 		
 	}
 	
@@ -53,12 +53,6 @@ public class ZmianaJasnosciController {
 			if(tablica_lut_jasniej[i] > 255)tablica_lut_jasniej[i] = 255;
 			if(tablica_lut_jasniej[i] < 0)tablica_lut_jasniej[i] = 0;
         }
-		
-//		for(int i=0; i< 256; i++)
-//		{
-//			System.out.print("["+i+"]:"+tablica_lut_jasniej[i]+" ");
-//		}
-//		System.out.println();
 		
 		
 		tablica_lut_jasniej[0] = 1;
@@ -92,12 +86,6 @@ public class ZmianaJasnosciController {
 			if(tablica_lut_ciemniej[i] > 255)tablica_lut_ciemniej[i] = 255;
 			if(tablica_lut_ciemniej[i] < 0)tablica_lut_ciemniej[i] = 0;
         }
-		
-		for(int i=0; i< 256; i++)
-		{
-			System.out.print("["+i+"]:"+tablica_lut_ciemniej[i]+" ");
-		}
-		System.out.println();
 		
         PixelReader pixelReader = iWorkingImage.getImage().getPixelReader();
         WritableImage wimage = new WritableImage((int) iWorkingImage.getImage().getWidth(), (int) iWorkingImage.getImage().getHeight());

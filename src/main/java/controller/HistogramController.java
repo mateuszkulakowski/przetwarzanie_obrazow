@@ -4,7 +4,7 @@ import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.ClassKeeper;
+import data.ItemKeeper;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -45,7 +45,7 @@ public class HistogramController {
 	
     @FXML
     void initialize() {
-		StackPaneWindowController controller = ClassKeeper.getStackPaneWindowController();
+		StackPaneWindowController controller = ItemKeeper.getStackPaneWindowController();
     	
 		try
 		{
