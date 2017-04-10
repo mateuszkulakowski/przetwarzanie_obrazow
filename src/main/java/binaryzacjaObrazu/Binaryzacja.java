@@ -2,7 +2,7 @@ package binaryzacjaObrazu;
 
 import java.util.Optional;
 
-import data.ClassKeeper;
+import data.ItemKeeper;
 import javafx.geometry.Insets;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -62,7 +62,7 @@ public class Binaryzacja {
     		
     		
     		//Zamiana na czarno bia³y Ÿród³o: http://www.algorytm.org/przetwarzanie-obrazow/skala-szarosci.html
-			ImageView iWorkingImage = ClassKeeper.getStackPaneWindowController().iWorkingImage;
+			ImageView iWorkingImage = ItemKeeper.getStackPaneWindowController().iWorkingImage;
 	        WritableImage wimage = new WritableImage((int) iWorkingImage.getImage().getWidth(), (int) iWorkingImage.getImage().getHeight());
 	        PixelWriter pw = wimage.getPixelWriter();
 	        PixelReader pixelReader = iWorkingImage.getImage().getPixelReader();
@@ -97,7 +97,7 @@ public class Binaryzacja {
 	
 	public static void otsu()
 	{
-		Image image = czarnobialy(ClassKeeper.spwk.iWorkingImage.getImage());
+		Image image = czarnobialy(ItemKeeper.spwk.iWorkingImage.getImage());
 		
 		
 		int threshold;
@@ -111,17 +111,20 @@ public class Binaryzacja {
                 hist[grey]++;
             }
         }
+        
+        // Ÿród³o algorymu http://cez.wi.pb.edu.pl/moodle/file.php/819/Binaryzacja.pdf
         float UT = 0;
         for (int t = 0; t < 256; t++) {
             UT += t * hist[t];
         }
+        
         float sumB = 0;
         int P1 = 0;
         int P0 = 0;
         float varMax = 0;
         threshold = 0;
-        for (int t = 0; t < 256; t++) {
-            P1 += hist[t];               // prawdopodobieñstwo t³a
+        for (int i = 0; i < 256; i++) {
+            P1 += hist[i];               // prawdopodobieñstwo t³a
             if (P1 == 0) {
                 continue;
             }
@@ -131,7 +134,7 @@ public class Binaryzacja {
                 break;
             }
 
-            sumB += (float) (t * hist[t]);
+            sumB += (float) (i * hist[i]);
 
             float U1 = sumB / P1;            // œrednia jasnoœæ klasy t³a
             float U0 = (UT - sumB) / P0;    // œrednia jasnoœæ klasy obiektu
@@ -142,7 +145,7 @@ public class Binaryzacja {
             // nowe maximum znalezione
             if (varBetween > varMax) {
                 varMax = varBetween;
-                threshold = t;
+                threshold = i;
             }
         }
         
@@ -169,15 +172,14 @@ public class Binaryzacja {
 
         }
         
-        ClassKeeper.spwk.iWorkingImage.setImage(wimage);
+        ItemKeeper.spwk.iWorkingImage.setImage(wimage);
 	}
 	
-	private static int oblicz_srednia_pixeli_okna(Image image, int start_x, int koniec_x, int start_y, int koniec_y)
+	private static int oblicz_srednia_pixeli_okna(Image image,int start_x, int koniec_x, int start_y, int koniec_y)
 	{
 		int suma = 0;
 		int liczba_pixeli = 0;
 		
-        WritableImage wimage = new WritableImage((int) image.getWidth(), (int) image.getHeight());
         PixelReader pr = image.getPixelReader();
 		
 		for(int i=start_x; i<=koniec_x; i++)
@@ -185,7 +187,6 @@ public class Binaryzacja {
 			for(int j=start_y; j<=koniec_y; j++)
 			{
 				int argb = pr.getArgb(i, j);
-                int a = (argb >> 24) & 0xFF;
                 int grey = (argb >> 16) & 0xFF;
                 
                 suma+= grey;
@@ -204,7 +205,6 @@ public class Binaryzacja {
 		double odchylenie = 0;
 		double liczba_pixeli = 0;
 		
-        WritableImage wimage = new WritableImage((int) image.getWidth(), (int) image.getHeight());
         PixelReader pr = image.getPixelReader();
 		
 		for(int i=start_x; i<=koniec_x; i++)
@@ -268,11 +268,13 @@ public class Binaryzacja {
 			double k = Double.parseDouble(wpisane_wartosci.getValue());
 			int promien = rozmiar_okna/2;
 			
-			Image image = czarnobialy(ClassKeeper.getStackPaneWindowController().iWorkingImage.getImage());
+			Image image = czarnobialy(ItemKeeper.getStackPaneWindowController().iWorkingImage.getImage());
+			Image imageOryginal = czarnobialy(ItemKeeper.getStackPaneWindowController().iOryginalImage.getImage());
 			
 			WritableImage wimage = new WritableImage((int) image.getWidth(), (int) image.getHeight());
 	        PixelWriter pw = wimage.getPixelWriter();
-	        PixelReader pr = image.getPixelReader();
+	        PixelReader pr = imageOryginal.getPixelReader();
+	        
 	        
 	        for (int i = 0; i < image.getHeight(); i++) {
 	            for (int j = 0; j < image.getWidth(); j++) {
@@ -294,8 +296,8 @@ public class Binaryzacja {
 	            	if(j+promien>=image.getWidth())okno_koniec_y=(int)image.getWidth()-1;
 	            	else okno_koniec_y=j+promien;
 
-	            	int srednia_pixeli_okna = oblicz_srednia_pixeli_okna(image,okno_start_y,okno_koniec_y,okno_start_x,okno_koniec_x);
-	            	double odchylenie_pixeli_okna = oblicz_odchylenie_pixeli_okna(image,srednia_pixeli_okna,okno_start_y,okno_koniec_y,okno_start_x,okno_koniec_x);
+	            	int srednia_pixeli_okna = oblicz_srednia_pixeli_okna(imageOryginal,okno_start_y,okno_koniec_y,okno_start_x,okno_koniec_x);
+	            	double odchylenie_pixeli_okna = oblicz_odchylenie_pixeli_okna(imageOryginal,srednia_pixeli_okna,okno_start_y,okno_koniec_y,okno_start_x,okno_koniec_x);
 	            	//System.out.println(srednia_pixeli_okna+" "+odchylenie_pixeli_okna+" "+okno_start_x+" "+okno_koniec_x+" "+okno_start_y+" "+okno_koniec_y);
 	            
 	            	double prog = (srednia_pixeli_okna+k*odchylenie_pixeli_okna);
@@ -313,7 +315,7 @@ public class Binaryzacja {
 	            }
 	        }
 	        
-	        ClassKeeper.spwk.iWorkingImage.setImage(wimage);
+	        ItemKeeper.spwk.iWorkingImage.setImage(wimage);
 		});
 			
         

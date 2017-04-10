@@ -2,7 +2,7 @@ package rozciagniecieHistogramu;
 
 import java.util.Optional;
 
-import data.ClassKeeper;
+import data.ItemKeeper;
 import javafx.geometry.Insets;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -85,7 +85,7 @@ public class RozciagniecieHistogramu {
 		        
 		        //for(int i=0;i<256;i++)System.out.println(i+ ":" +(int)tablica_lut[i]);
 		        
-				ImageView iWorkingImage = ClassKeeper.getStackPaneWindowController().iWorkingImage;
+				ImageView iWorkingImage = ItemKeeper.getStackPaneWindowController().iWorkingImage;
 		        WritableImage wimage = new WritableImage((int) iWorkingImage.getImage().getWidth(), (int) iWorkingImage.getImage().getHeight());
 		        PixelWriter pw = wimage.getPixelWriter();
 		        PixelReader pixelReader = iWorkingImage.getImage().getPixelReader();

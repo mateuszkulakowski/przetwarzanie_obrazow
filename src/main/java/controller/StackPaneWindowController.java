@@ -19,7 +19,8 @@ import com.idrsolutions.image.tiff.TiffDecoder;
 import com.sun.javafx.image.impl.IntArgb;
 
 import binaryzacjaObrazu.Binaryzacja;
-import data.ClassKeeper;
+import data.ItemKeeper;
+import filtry.Filtry;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.io.FileSaver;
@@ -108,7 +109,7 @@ public class StackPaneWindowController {
 	void initialize()
 	{
 		//DODAJEMY CONTROLLERA DO WIDZIALNOSCI W CALYM PROGRAMIE
-		ClassKeeper.setStackPaneWindowController(this);
+		ItemKeeper.setStackPaneWindowController(this);
 		
 		 zoomPropertyOryginalImage.addListener(new InvalidationListener() {
 			@Override
@@ -366,6 +367,52 @@ public class StackPaneWindowController {
 		Binaryzacja.niblack();
 	}
 	
+	@FXML
+	public void onActionFiltrLiniowy() throws IOException
+	{
+		FXMLLoader fxlm = new FXMLLoader();
+		fxlm.setLocation(this.getClass().getResource("/fxml/filtrLinowyWprowadzMaske.fxml"));
+		
+		VBox stack = fxlm.load();
+		Scene scene = new Scene(stack);
+		
+		Stage stage = new Stage();
+		stage.setScene(scene);
+		stage.setResizable(false);
+		stage.showAndWait();
+		
+		if(ItemKeeper.FiltrLiniowyMaska != null)
+			Filtry.FiltrLiniowy();
+	}
+	
+	@FXML
+	public void onActionFiltrKuwahara()
+	{
+		Filtry.FiltrKuwahara();
+	}
+	
+	@FXML
+	public void onActionFiltrMedianowy()
+	{
+		TextInputDialog dialog = new TextInputDialog();
+    	dialog.setTitle("Wybór progu binaryzacji");
+    	dialog.setHeaderText("Wybierz wartoœæ progu");
+    	dialog.setContentText("Wartoœæ:");
+    	Optional<String> wpisana_wartosc = dialog.showAndWait();
+    	
+    	if(wpisana_wartosc.isPresent())
+    	{
+    		String maska = wpisana_wartosc.toString().substring(9, wpisana_wartosc.toString().length()-1);
+    		
+    		//Maski najlepiej podawaæ liczbê nieparzyst¹..
+    		try
+    		{
+    			Filtry.FiltrMedianowy(Integer.parseInt(maska));
+    		}
+    		catch(NumberFormatException ex){System.out.println("Wprowadzono tekst zamiast liczby!!");}
+
+    	}
+	}
 	
 	
 	

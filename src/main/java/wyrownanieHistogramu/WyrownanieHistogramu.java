@@ -1,6 +1,6 @@
 package wyrownanieHistogramu;
 
-import data.ClassKeeper;
+import data.ItemKeeper;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
@@ -27,7 +27,7 @@ public class WyrownanieHistogramu {
 		int ilosc_pixeli_green[] = new int[256];
 		int ilosc_pixeli_blue[] = new int[256];
 		
-		ImageView iWorkingImage = ClassKeeper.getStackPaneWindowController().iWorkingImage;
+		ImageView iWorkingImage = ItemKeeper.getStackPaneWindowController().iWorkingImage;
 		PixelReader pixelReader = iWorkingImage.getImage().getPixelReader();
 		
 		int rozmiar_obrazu = (int) (iWorkingImage.getImage().getWidth() * iWorkingImage.getImage().getHeight());

@@ -27,9 +27,20 @@
                   <MenuItem fx:id="mPrzyciemnianieRozjasnianie" mnemonicParsing="false" onAction="#onActionPrzyciemnianieRozjasnianie" text="Przyciemnienie/Rozjaśnianie" />
                   <MenuItem mnemonicParsing="false" onAction="#onActionRozciagniecieHistogramu" text="Rozciągnięcie histogramu" />
                   <MenuItem mnemonicParsing="false" onAction="#onActionWyrownanieHistogramu" text="Wyrównanie histogramu" />
-                  <MenuItem mnemonicParsing="false" onAction="#onActionBinaryzacjaReczna" text="Binaryzacja - ręczna" />
-                  <MenuItem mnemonicParsing="false" onAction="#onActionBinaryzacjaOtsu" text="Binaryzacja - Otsu" />
-                  <MenuItem mnemonicParsing="false" onAction="#onActionBinaryzacjaNiblack" text="Binaryzacja - Niblack" />
+                  <Menu mnemonicParsing="false" text="Binaryzacja">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#onActionBinaryzacjaReczna" text="Binaryzacja - ręczna" />
+                        <MenuItem mnemonicParsing="false" onAction="#onActionBinaryzacjaOtsu" text="Binaryzacja - Otsu" />
+                        <MenuItem mnemonicParsing="false" onAction="#onActionBinaryzacjaNiblack" text="Binaryzacja - Niblack" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Filtry">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#onActionFiltrLiniowy" text="Filtr liniowy - funkcja splotu" />
+                        <MenuItem mnemonicParsing="false" onAction="#onActionFiltrKuwahara" text="Filtr Kuwahara" />
+                        <MenuItem mnemonicParsing="false" onAction="#onActionFiltrMedianowy" text="Filtr Medianowy" />
+                    </items>
+                  </Menu>
                </items></Menu>
           <Menu mnemonicParsing="false" text="Pomoc">
           </Menu>
